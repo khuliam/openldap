@@ -47,29 +47,29 @@
     - name: Copy base DN for Groups template file
       template: src=basedn.ldif.j2 dest=/tmp/basedn.ldif
 
-    - name: Check if base DN already exists
-      command: ldapsearch -x -D "cn=admin,dc={{ env }},dc={{ organisation_name }},dc=ca" -w {{ admin_password }} -b "dc={{ env }},dc={{ organisation_name }},dc=ca" "(objectclass=organizationalUnit)" | grep "ou={{ ldap_group_name }}"
-      register: base_dn_check
-      changed_when: false
-      failed_when: false
+    # - name: Check if base DN already exists
+    #   command: ldapsearch -x -D "cn=admin,dc={{ env }},dc={{ organisation_name }},dc=ca" -w {{ admin_password }} -b "dc={{ env }},dc={{ organisation_name }},dc=ca" "(objectclass=organizationalUnit)" | grep "ou={{ ldap_group_name }}"
+    #   register: base_dn_check
+    #   changed_when: false
+    #   failed_when: false
 
-    - name: Add base DN for users Groups
-      command: ldapadd -x -D cn=admin,dc={{ env }},dc={{ organisation_name }},dc=ca -w {{ admin_password }} -f /tmp/basedn.ldif
-      when: "'ou=users' not in base_dn_check.stdout"
+    # - name: Add base DN for users Groups
+    #   command: ldapadd -x -D cn=admin,dc={{ env }},dc={{ organisation_name }},dc=ca -w {{ admin_password }} -f /tmp/basedn.ldif
+    #   when: "'ou=users' not in base_dn_check.stdout"
 
-    - name: Copy Add Users on Groups template file
-      template: src=users.ldif.j2 dest=/tmp/user.ldif
+    # - name: Copy Add Users on Groups template file
+    #   template: src=users.ldif.j2 dest=/tmp/user.ldif
 
-    - name: Check if user exists
-      command: ldapsearch -x -D "cn=admin,dc={{ env }},dc={{ organisation_name }},dc=ca" -w {{ admin_password }} -b "dc={{ env }},dc={{ organisation_name }},dc=ca" "(&(objectClass=inetOrgPerson)(cn={{ username }}))"
-      register: user_search_result
-      changed_when: false
-      failed_when: false
+    # - name: Check if user exists
+    #   command: ldapsearch -x -D "cn=admin,dc={{ env }},dc={{ organisation_name }},dc=ca" -w {{ admin_password }} -b "dc={{ env }},dc={{ organisation_name }},dc=ca" "(&(objectClass=inetOrgPerson)(cn={{ username }}))"
+    #   register: user_search_result
+    #   changed_when: false
+    #   failed_when: false
 
-    - name: Add user to the group
-      command: ldapadd -x -D "cn=admin,dc={{ env }},dc={{ organisation_name }},dc=ca" -w {{ admin_password }} -f /tmp/user.ldif
-      when: user_search_result.stdout.find("uid=hkenfack") == -1
-      ignore_errors: true
+    # - name: Add user to the group
+    #   command: ldapadd -x -D "cn=admin,dc={{ env }},dc={{ organisation_name }},dc=ca" -w {{ admin_password }} -f /tmp/user.ldif
+    #   when: user_search_result.stdout.find("uid=hkenfack") == -1
+    #   ignore_errors: true
 
     - name: Configure phpldapadmin
       template:
