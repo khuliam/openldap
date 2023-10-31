@@ -32,3 +32,8 @@
       - slapd
       - ldap-utils
     state: present
+
+- name: Generate ldap conf
+  ansible.builtin.template:
+    src: ./template/vm/ldap.conf.j2
+    dest: /etc/ldap/ldap.conf
