@@ -1,0 +1,67 @@
+- name: Download phpLDAPadmin source code
+  get_url:
+    url: "http://ftp.de.debian.org/debian/pool/main/p/phpldapadmin/{{openldap_version}}"
+    dest: "/tmp/{{openldap_version}}"
+
+- name: Install phpLDAPadmin
+  apt:
+    deb: "/tmp/{{openldap_version}}"
+
+- name: Configure phpldapadmin
+  template:
+    src: ./templates/vm/config.php.j2
+    dest: /etc/phpldapadmin/config.php
+
+- name: Configure Apache for phpLDAPadmin
+  template:
+    src: ./templates/vm/phpldapadmin.conf.j2
+    dest: /etc/apache2/conf-available/phpldapadmin.conf
+
+- name: Set ownership of the file to www-data
+  file:
+    path: /usr/share/phpldapadmin/
+    owner: www-data
+
+- name: Disable Apache default site
+  command: a2dissite 000-default.conf
+
+- name: Check Apache syntax
+  command: apachectl -t
+
+- name: Enable the Apache PHP modules
+  command: a2enmod php8.2
+
+- name: Enable the Apache LDAP modules
+  command: a2enmod ldap
+
+- name: Install ufw firewall
+  apt:
+    name: ufw
+    state: present
+
+- name: Enable ufw
+  ufw:
+    state: enabled
+
+- name: Open LDAP port in ufw
+  ufw:
+    rule: allow
+    port: ldap
+    comment: "Allow ldap port"
+
+- name: Open Apache on firewall
+  ufw:
+    rule: allow
+    port: "80"
+    comment: "Allow HTTP and HTTPS traffic"
+
+- name: Open ssh port
+  ufw:
+    rule: allow
+    port: "22"
+    comment: "Allow ssh connexion"
+
+- name: Restart Apache web server
+  service:
+    name: apache2
+    state: restarted

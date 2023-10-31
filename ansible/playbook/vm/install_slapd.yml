@@ -1,0 +1,39 @@
+---
+
+- name: Set slapd debconf values
+  debconf:
+    name: slapd
+    question: "{{ item.question }}"
+    value: "{{ item.value }}"
+    vtype: "{{ item.vtype }}"
+  loop:
+    - { question: "slapd/root_password", value: "{{ openldap_admin_password }}", vtype: "password" }
+    - { question: "slapd/root_password_again", value: "{{ openldap_admin_password }}", vtype: "password" }
+    - { question: "slapd/internal/adminpw", value: "{{ openldap_admin_password }}", vtype: "password" }
+    - { question: "slapd/internal/generated_adminpw", value: "{{ openldap_admin_password }}", vtype: "password" }
+    - { question: "slapd/password2", value: "{{ openldap_admin_password }}", vtype: "password" }
+    - { question: "slapd/password1", value: "{{ openldap_admin_password }}", vtype: "password" }
+    - { question: "slapd/domain", value: "{{ ldap_domain }}", vtype: "string" }
+    - { question: "shared/organization", value: "{{ ldap_domain }}", vtype: "string" }
+    - { question: "slapd/backend", value: "MDB", vtype: "select" }
+    - { question: "slapd/no_configuration", value: "false", vtype: "boolean" }
+    - { question: "slapd/slapd/move_old_database", value: "true", vtype: "boolean" }
+    - { question: "slapd/slapd/purge_database", value: "false", vtype: "boolean" }
+    - { question: "slapd/slapd/allow_ldap_v2", value: "false", vtype: "boolean" }
+    - { question: "slapd/slapd/unsafe_selfwrite_acl", value: "note", vtype: "note" }
+    - { question: "slapd/slapd/dump_database_destdir", value: "/var/backups/slapd-VERSION", vtype: "string" }
+    - { question: "slapd/slapd/dump_database", value: "when needed", vtype: "select" }
+    - { question: "slapd/slapd/invalid_config", value: "true", vtype: "boolean" }
+    - { question: "slapd/slapd/password_mismatch", value: "note", vtype: "note" }
+
+- name: Install slapd package
+  apt:
+    name: 
+      - slapd
+      - ldap-utils
+    state: present
+
+- name: Redémarrer le service slapd
+  ansible.builtin.service:
+    name: slapd
+    state: restarted

@@ -1,0 +1,16 @@
+---
+- name : Install openldap
+  hosts: openldap
+  become: true
+
+  pre_tasks:
+    - name: include vars file
+      include_vars: "{{ item }}.yml"
+      loop:
+        - vars
+
+  tasks:
+    - include_tasks: playbook/vm/requirements.yml
+    - include_tasks: playbook/vm/install_slapd.yml
+    - include_tasks: playbook/vm/install_phpldapadmin.yml
+    - include_tasks: playbook/vm/create_entry.yml

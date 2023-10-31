@@ -1,0 +1,7 @@
+Alias /phpldapadmin /usr/share/phpldapadmin/htdocs
+
+<Directory /usr/share/phpldapadmin/htdocs>
+  <IfModule mod_authz_core.c>
+    Require all granted
+  </IfModule>
+</Directory>

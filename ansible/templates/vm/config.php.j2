@@ -1,0 +1,50 @@
+<?php
+/*********************************************
+ * Useful important configuration overrides  *
+ *********************************************/
+
+$config->custom->appearance['hide_template_warning'] = true;
+
+$config->custom->appearance['friendly_attrs'] = array(
+        'facsimileTelephoneNumber' => 'Fax',
+        'gid'                      => 'Group',
+        'mail'                     => 'Email',
+        'telephoneNumber'          => 'Telephone',
+        'uid'                      => 'User Name',
+        'userPassword'             => 'Password'
+);
+
+/*********************************************
+ * Define your LDAP servers in this section  *
+ *********************************************/
+
+$servers = new Datastore();
+
+/* \$servers->NewServer('ldap_pla') must be called before each new LDAP server
+   declaration. */
+$servers->newServer('ldap_pla');
+
+/* A convenient name that will appear in the tree viewer and throughout
+   phpLDAPadmin to identify this LDAP server to users. */
+$servers->setValue('server','name','{{ ldap_title }}');
+
+$servers->setValue('server','host','{{ ldap_server_ip }}');
+
+/* The port your LDAP server listens on (no quotes). 389 is standard. */
+$servers->setValue('server','port',389);
+
+/* Array of base DNs of your LDAP server. Leave this blank to have phpLDAPadmin
+   auto-detect it for you. */
+$servers->setValue('server','base',array('{{ ldap_base_dn }}'));
+
+$servers->setValue('login','auth_type','session');
+
+/* The DN of the user for phpLDAPadmin to bind with. For anonymous binds or
+   'cookie','session' or 'sasl' auth_types, LEAVE THE LOGIN_DN AND LOGIN_PASS
+   BLANK. If you specify a login_attr in conjunction with a cookie or session
+   auth_type, then you can also specify the bind_id/bind_pass here for searching
+   the directory for users (ie, if your LDAP server does not allow anonymous
+   binds. */
+$servers->setValue('login','bind_id','{{ ldap_admin }}');
+
+?>
