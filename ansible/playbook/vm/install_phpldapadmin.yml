@@ -21,12 +21,12 @@
 
 - name: Configure phpldapadmin
   template:
-    src: config.php.j2
+    src: ./templates/vm/config.php.j2
     dest: /etc/phpldapadmin/config.php
 
 - name: Configure Apache for phpLDAPadmin
   template:
-    src: phpldapadmin.conf.j2
+    src: ./templates/vm/phpldapadmin.conf.j2
     dest: /etc/apache2/conf-available/phpldapadmin.conf
 
 - name: Set ownership of the file to www-data
@@ -39,10 +39,6 @@
 
 - name: Check Apache syntax
   command: apachectl -t
-
-- name: Run cat command
-  command: cat /etc/debian_version
-  register: debian_version_output
 
 - name: Enable the Apache PHP modules
   command: a2enmod php7.4
