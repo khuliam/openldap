@@ -13,8 +13,8 @@
     - { question: "slapd/internal/generated_adminpw", value: "{{ openldap_admin_password }}", vtype: "password" }
     - { question: "slapd/password2", value: "{{ openldap_admin_password }}", vtype: "password" }
     - { question: "slapd/password1", value: "{{ openldap_admin_password }}", vtype: "password" }
-    - { question: "slapd/domain", value: "{{ LDAP_DOMAIN }}", vtype: "string" }
-    - { question: "shared/organization", value: "{{ LDAP_DOMAIN }}", vtype: "string" }
+    - { question: "slapd/domain", value: "{{ ldap_domain }}", vtype: "string" }
+    - { question: "shared/organization", value: "{{ ldap_domain }}", vtype: "string" }
     - { question: "slapd/backend", value: "MDB", vtype: "select" }
     - { question: "slapd/no_configuration", value: "false", vtype: "boolean" }
     - { question: "slapd/slapd/move_old_database", value: "true", vtype: "boolean" }
