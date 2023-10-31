@@ -5,3 +5,4 @@ admin_password: azureadminpassword
 ldap_server_ip: 172.16.1.4
 ldap_group_name: users
 username: azureadmin
+openldap_version: phpldapadmin_1.2.6.3-0.3_all.deb

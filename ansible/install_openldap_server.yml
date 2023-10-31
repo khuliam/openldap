@@ -37,12 +37,12 @@
 
     - name: Download phpLDAPadmin source code
       get_url:
-        url: "http://ftp.de.debian.org/debian/pool/main/p/phpldapadmin/phpldapadmin_1.2.6.6-1_all.deb"
-        dest: "/tmp/phpldapadmin_1.2.6.6-1_all.deb"
+        url: "http://ftp.de.debian.org/debian/pool/main/p/phpldapadmin/{{openldap_version}}"
+        dest: "/tmp/{{openldap_version}}"
 
     - name: Install phpLDAPadmin
       apt:
-        deb: "/tmp/phpldapadmin_1.2.6.6-1_all.deb"
+        deb: "/tmp/{{openldap_version}}"
 
     - name: Add base DN for Groups
       template: src=basedn.ldif.j2 dest=/tmp/basedn.ldif
