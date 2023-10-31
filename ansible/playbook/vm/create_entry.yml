@@ -1,0 +1,40 @@
+
+- name: "create cn=users,{{ldap_base_dn}} entry"
+  community.general.ldap_entry:
+    dn: "cn=users,{{ldap_base_dn}}"
+    objectClass:
+      - posixGroup
+      - top
+    attributes:
+      cn: "users"
+      gidnumber: 1
+  args: "{{ ldap_auth }}"
+
+- name: "create cn=groups,{{ldap_base_dn}} entry"
+  community.general.ldap_entry:
+    dn: "ou=groups,{{ldap_base_dn}}"
+    objectClass:
+      - organizationalUnit
+    attributes:
+      ou: "groups"
+  args: "{{ ldap_auth }}"
+
+- name: "create cn={{ dflt_user }},cn=users,{{ldap_base_dn}} entry"
+  community.general.ldap_entry:
+    dn: "cn={{ dflt_user }},cn=users,{{ldap_base_dn}}"
+    objectClass:
+      - inetOrgPerson
+      - posixAccount
+      - top
+    attributes:
+      cn: "{{ dflt_user }}"
+      sn: "{{ dflt_user }}"
+      uid: "{{ dflt_user }}"
+      userPassword: "{{ dflt_user }}"
+      uidNumber: 1
+      gidNumber: 1
+      loginShell: /bin/bash
+      homeDirectory: "/home/users/{{ dflt_user }}"
+      givenName: "{{ dflt_user }}"
+      mail: "{{ dflt_user }}@{{ ldap_domain }}"
+  args: "{{ ldap_auth }}"

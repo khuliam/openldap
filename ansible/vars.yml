@@ -1,8 +1,18 @@
 env: dev
-organisation_name: onesi
-dns_domain_name: dev.onesi.ca
-admin_password: azureadminpassword
+organisation_name: local
+openldap_admin_password: azureadminpassword
 ldap_server_ip: 172.16.1.4
 ldap_group_name: users
-username: azureadmin
 openldap_version: phpldapadmin_1.2.6.3-0.3_all.deb
+ldap_organisation: "LOCAL LDAP DEV"
+ldap_base_dn: "dc=dev,dc=local,dc=ca"
+ldap_domain: "dev.local.ca"
+dflt_user : "local"
+ldap_admin: "cn=admin,dc=dev,dc=local,dc=ca"
+ldap_title: "LOCAL LDAP DEV"
+php_version: 7.4
+
+ldap_auth:
+  server_uri: "ldap://{{ ldap_server_ip }}/"
+  bind_dn: "{{ ldap_admin }}"
+  bind_pw: "{{ ldap_admin_password }}"
