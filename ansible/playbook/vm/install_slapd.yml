@@ -32,8 +32,3 @@
       - slapd
       - ldap-utils
     state: present
-
-- name: Generate ldap conf
-  template:
-    src: ldap.config.j2
-    dest: /etc/ldap/ldap.conf
