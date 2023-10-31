@@ -41,7 +41,7 @@
   command: apachectl -t
 
 - name: Enable the Apache PHP modules
-  command: a2enmod php7.4
+  command: a2enmod php8.2
 
 - name: Enable the Apache LDAP modules
   command: a2enmod ldap
