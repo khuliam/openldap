@@ -35,5 +35,5 @@
 
 - name: Generate ldap conf
   ansible.builtin.template:
-    src: ./template/vm/ldap.conf.j2
+    src: ./templates/vm/ldap.conf.j2
     dest: /etc/ldap/ldap.conf
