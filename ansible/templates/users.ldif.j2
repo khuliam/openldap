@@ -1,0 +1,9 @@
+dn: cn={{ username }},ou={{ ldap_group_name }},dc={{ env }},dc={{ organisation_name }},dc=ca
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: {{ username }}
+sn: {{ username }}
+uid: {{ username }}
+userPassword: {CLEARTEXT}{{ username }}

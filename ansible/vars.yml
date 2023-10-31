@@ -1,0 +1,7 @@
+env: dev
+organisation_name: onesi
+dns_domain_name: dev.onesi.ca
+admin_password: azureadminpassword
+ldap_server_ip: 172.16.1.4
+ldap_group_name: users
+username: azureadmin

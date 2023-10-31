@@ -1,0 +1,7 @@
+slapd slapd/password1 password {{ admin_password }}
+slapd slapd/password2 password {{ admin_password }}
+slapd slapd/internal/adminpw password {{ admin_password }}
+slapd slapd/internal/generated_adminpw password {{ admin_password }}
+slapd slapd/password-confirm password {{ admin_password }}
+slapd slapd/allow_ldap_v2 boolean false
+slapd slapd/invalid_config boolean true
