@@ -42,3 +42,16 @@
       - php-ldap
 
     state: present
+
+- name: Installer le package PHP XML
+  package:
+    name: php-xml
+    state: present
+
+- name: Activer l'extension xml in php.ini
+  lineinfile:
+    path: /etc/php.ini
+    regexp: '^;?extension=xml$'
+    line: 'extension=xml'
+    state: present
+  notify: Restart PHP

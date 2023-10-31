@@ -1,15 +1,3 @@
-# - name: clone all onesi projects
-#   ansible.builtin.git:
-#     repo: "https://github.com/breisig/phpLDAPadmin.git"
-#     dest: "/var/www/html/phpldapadmin"
-
-# - name: Generate phpldapadmin conf
-#   ansible.builtin.template:
-#     src: "template/vm/{{ item.src }}"
-#     dest: "{{ item.dest }}"
-#   with_items: 
-#     - {src: "config.php.j2", dest : "/var/www/html/phpldapadmin/config/config.php"}
-
 - name: Download phpLDAPadmin source code
   get_url:
     url: "http://ftp.de.debian.org/debian/pool/main/p/phpldapadmin/{{openldap_version}}"
