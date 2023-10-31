@@ -50,7 +50,7 @@
 
 - name: Activer l'extension xml in php.ini
   lineinfile:
-    path: /etc/php.ini
+    path: /etc/php/8.2/cli/php.ini
     regexp: '^;?extension=xml$'
     line: 'extension=xml'
     state: present
