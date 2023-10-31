@@ -11,7 +11,7 @@
 
   tasks:
     - include_tasks: playbook/vm/requirements.yml
-    - include_tasks: playbook/vm/install-slapd.yml
+    - include_tasks: playbook/vm/install_slapd.yml
     - include_tasks: playbook/vm/install_phpldapadmin.yml
     - include_tasks: playbook/vm/install_nginx.yml
     - include_tasks: playbook/vm/create_entry.yml
