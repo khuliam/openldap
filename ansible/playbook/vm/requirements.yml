@@ -54,10 +54,3 @@
     regexp: '^;?extension=xml$'
     line: 'extension=xml'
     state: present
-  notify: Restart PHP
-
-handlers:
-  - name: Restart PHP
-    service:
-      name: php-fpm
-      state: restarted
