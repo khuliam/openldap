@@ -33,10 +33,10 @@
       - ldap-utils
     state: present
 
-- name: Generate ldap conf
-  ansible.builtin.template:
-    src: ./templates/vm/ldap.conf.j2
-    dest: /etc/ldap/ldap.conf
+# - name: Generate ldap conf
+#   ansible.builtin.template:
+#     src: ./templates/vm/ldap.conf.j2
+#     dest: /etc/ldap/ldap.conf
 
 - name: Redémarrer le service slapd
   ansible.builtin.service:
