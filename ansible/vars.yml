@@ -10,7 +10,7 @@ ldap_domain: "dev.local.ca"
 dflt_user : "local"
 ldap_admin: "cn=admin,dc=dev,dc=local,dc=ca"
 ldap_title: "LOCAL LDAP DEV"
-php_version: 7.4
+php_version: 8.2
 
 ldap_auth:
   server_uri: "ldap://{{ ldap_server_ip }}:389/"
