@@ -1,6 +1,6 @@
 ---
-- name : Install openldap
-  hosts: openldap
+- name : Install openldap on azure server
+  hosts: azure server
   become: true
 
   pre_tasks:
