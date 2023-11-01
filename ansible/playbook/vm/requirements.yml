@@ -3,6 +3,15 @@
   ansible.builtin.apt:
     update_cache: yes
 
+- name: Install gpg packages using apt
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - gnupg
+    - gnupg1
+    - gnupg2
+
 - name: add php apt-key
   ansible.builtin.apt_key: 
     url: "https://packages.sury.org/php/apt.gpg" 
